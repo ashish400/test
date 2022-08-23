@@ -10,17 +10,17 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: one
-    jobs:
-      - job: one
-        steps:
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Write your commands here
+  # - stage: one
+  #   jobs:
+  #     - job: one
+  #       steps:
+  #         - task: Bash@3
+  #           inputs:
+  #             targetType: 'inline'
+  #             script: |
+  #               # Write your commands here
                 
-                echo 'Hello stage one'
+  #               echo 'Hello stage one'
     
   - stage: two
     jobs:
@@ -34,10 +34,18 @@ stages:
                 
                 echo 'Hello stage two'
           
+          # - task: pipeline-triggerer-task@0
+          #   inputs:
+          #     adoServiceConnection: 'serv-conn-one'
+          #     Project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
+          #     PipelineType: 'Build'
+          #     BuildDefinition: 'dependent'
+          #     Async: false
+          
           - task: pipeline-triggerer-task@0
             inputs:
               adoServiceConnection: 'serv-conn-one'
               Project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
               PipelineType: 'Build'
               BuildDefinition: 'dependent'
-              Async: false
+              Async: true
