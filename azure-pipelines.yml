@@ -10,9 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: Build_Test
+  - stage: stage 1
     jobs:
-      - job: Installer
+      - job: 1
         steps:
           - task: Bash@3
             inputs:
@@ -21,3 +21,15 @@ stages:
                 # Write your commands here
                 
                 echo 'Hello stage one'
+    
+  - stage: stage 2
+    jobs:
+      - job: 2
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
+                
+                echo 'Hello stage two'
