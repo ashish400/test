@@ -14,4 +14,10 @@ stages:
     jobs:
       - job: Installer
         steps:
-           - bash: echo "A"
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
+                
+                echo 'Hello stage one'
