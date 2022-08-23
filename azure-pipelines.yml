@@ -22,7 +22,7 @@ stages:
                 
                 echo 'Hello stage one'
     
-  - stage: stage 2
+  - stage: two
     jobs:
       - job: two
         steps:
