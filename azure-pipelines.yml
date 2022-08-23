@@ -40,4 +40,4 @@ stages:
               Project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
               PipelineType: 'Build'
               BuildDefinition: 'ashish400.test1234'
-              Async: true
+              Async: false
