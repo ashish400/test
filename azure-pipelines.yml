@@ -42,10 +42,11 @@ stages:
           #     BuildDefinition: 'dependent'
           #     Async: false
           
-          - task: pipeline-triggerer-task@0
+          - task: TriggerPipeline@2
             inputs:
-              adoServiceConnection: 'serv-conn-one'
-              Project: '260151e3-2f59-481f-8526-2730390bbe1c'
-              PipelineType: 'Build'
-              BuildDefinition: 'source'
-              Async: true
+              serviceConnection: 'second-connection'
+              project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
+              Pipeline: 'Build'
+              buildDefinition: '3'
+              Branch: 'main'
+              buildapiversion: '6.0'
