@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: stage 1
+  - stage: stage one
     jobs:
       - job: 1
         steps:
@@ -22,7 +22,7 @@ stages:
                 
                 echo 'Hello stage one'
     
-  - stage: stage 2
+  - stage: stage two
     jobs:
       - job: 2
         steps:
