@@ -10,20 +10,23 @@ pool:
 parameters:
 - name: configs
   type: string
-  default: 'x86,x64'
+  values:
+    - qa
+    - dev
+    - prod
 
 trigger: none
 
 jobs:
-- ${{ if contains(parameters.configs, 'x86') }}:
+- ${{ if contains(parameters.configs, 'qa') }}:
   - job: x86
     steps:
     - script: echo Building x86...
-- ${{ if contains(parameters.configs, 'x64') }}:
+- ${{ if contains(parameters.configs, 'dev') }}:
   - job: x64
     steps:
     - script: echo Building x64...
-- ${{ if contains(parameters.configs, 'arm') }}:
+- ${{ if contains(parameters.configs, 'prod') }}:
   - job: arm
     steps:
     - script: echo Building arm...
