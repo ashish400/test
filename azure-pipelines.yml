@@ -7,20 +7,20 @@ trigger:
 - main
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 stages:
-  # - stage: one
-  #   jobs:
-  #     - job: one
-  #       steps:
-  #         - task: Bash@3
-  #           inputs:
-  #             targetType: 'inline'
-  #             script: |
-  #               # Write your commands here
+  - stage: one
+    jobs:
+      - job: one
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
                 
-  #               echo 'Hello stage one'
+                echo 'Hello stage one'
     
   - stage: two
     jobs:
