@@ -40,9 +40,9 @@ stages:
      
       
     
-      - ${{ if contains(parameters.configs, 'prod') }}:
-      - job: prod
-        pool:
-            vmImage: 'windows-latest'
-        steps:
-        - script: echo hello from Window
+      # - ${{ if contains(parameters.configs, 'prod') }}:
+      # - job: prod
+      #   pool:
+      #       vmImage: 'windows-latest'
+      #   steps:
+      #   - script: echo hello from Window
