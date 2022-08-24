@@ -20,9 +20,7 @@ stages:
   - stage: one
     jobs:
      - ${{ if contains(parameters.configs, 'dev') }}:
-       - job: one
-        # pool:
-        #   vmImage: 'windows-latest'
+       - job: one 
          steps:
          -   script: echo hello from Windows
                 
