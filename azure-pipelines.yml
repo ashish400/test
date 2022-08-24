@@ -49,4 +49,4 @@ stages:
               Pipeline: 'Build'
               buildDefinition: '3'
               Branch: 'main'
-              buildapiversion: '6.0'
+              buildapiversion: '5.1'
