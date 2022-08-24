@@ -19,14 +19,14 @@ trigger: none
 
 jobs:
 - ${{ if contains(parameters.configs, 'qa') }}:
-  - job: x86
+  - job: qa
     steps:
     - script: echo qa.
 - ${{ if contains(parameters.configs, 'dev') }}:
-  - job: x64
+  - job: dev
     steps:
     - script: echo dev environment
 - ${{ if contains(parameters.configs, 'prod') }}:
-  - job: arm
+  - job: prod
     steps:
     - script: echo prod
