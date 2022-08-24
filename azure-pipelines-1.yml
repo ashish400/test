@@ -16,33 +16,31 @@ parameters:
     - prod
 
 trigger: none
-
-jobs:
-- ${{ if contains(parameters.configs, 'qa') }}:
-  - job: qa
-    steps:
-    - script: echo qa.
-- ${{ if contains(parameters.configs, 'dev') }}:
-  - job: dev
-    steps:
-    - script: echo dev environment
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your commands here
-          
-            echo 'Hello world'
-    - task: TriggerPipeline@2
-      inputs:
-        serviceConnection: 'second-connection'
-        project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
-        Pipeline: 'Build'
-        buildDefinition: '3'
-        Branch: 'main'
-        buildapiversion: '6.0'
+stages:
+  - stage: one
+    jobs:
+    - ${{ if contains(parameters.configs, 'dev') }}:
+      - job: one
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
+                
+                  echo 'Hello dev'
+          - task: TriggerPipeline@2
+            inputs:
+              serviceConnection: 'second-connection'
+              project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
+              Pipeline: 'Build'
+              buildDefinition: '3'
+              Branch: 'main'
+              buildapiversion: '6.0'
+     
+      
     
-- ${{ if contains(parameters.configs, 'prod') }}:
-  - job: prod
-    steps:
-    - script: echo prod
+      - ${{ if contains(parameters.configs, 'prod') }}:
+        - job: prod
+          steps:
+          - script: echo prod
