@@ -1,45 +1,112 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+trigger:
+  branches:
+    include:
+      - master
+    exclude:
+      - feat/*
+  paths:
+    include:
+      - apps/toyou-pwa
+      - packages/ui/toyou-component-library
+    exclude:
+      - apps/ghs-pwa
+      - packages/ui/ghs-component-library
+      - packages/utility
+      - devops
+      - tools
+
+pr: none
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 parameters:
-- name: configs
-  type: string
-  values:
-    - qa
-    - dev
-    - prod
+  - name: whichEnv
+    displayName: "Environment"
+    type: string
+    default: 'QA'
+    values:
+      - 'DEV'
+      - 'QA'
+      - 'SIT'
+      - 'UAT'
+      - 'PRO'
 
-trigger: none
+variables:
+  BuildNumber: 'frontend-$(Build.BuildNumber)'
+  Timestamp: $(date +%s)
+
 stages:
-  - stage: one
+  - stage: Build_Test
     jobs:
-      - job: one
+      - job: Installer
         steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: 'echo ''Hello installer'''
+         
+         
+      
+
+  - stage: SIT_Release
+    # dependsOn: QA_Release
+    condition: succeeded()
+    variables:
+      - group: sit-variable-group
+    jobs:
+      - job: sit_Deploy
+        
+          # - task: NodeTool@0
+          #   inputs:
+          #     versionSpec: '14.19.1'
+          #   displayName: 'Install Node.js'
+       
+      - ${{ if contains(parameters.whichEnv, 'SIT') }}:
+      - job: QA_Test_Integration
+      
+        pool:
+          vmImage: windows-latest
+        steps:
+      
+          # - task: TriggerPipeline@2
+          #   inputs:
+          #     serviceConnection: 'qa-pipeline-trigger-new'
+          #     project: 'e4981ee5-8d05-4c30-9e66-715fd6fdaa4b'
+          #     Pipeline: 'Build'
+          #     buildDefinition: '103'
+          #     Branch: 'refs/heads/feature/ASDA-1039'
+          #     buildapiversion: '7.1-preview.7'
+          
           - task: Bash@3
             inputs:
               targetType: 'inline'
               script: |
                 # Write your commands here
                 
-                  echo 'Hello dev'
-          - task: TriggerPipeline@2
-            inputs:
-              serviceConnection: 'second-connection'
-              project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
-              Pipeline: 'Build'
-              buildDefinition: '3'
-              Branch: 'main'
-              buildapiversion: '6.0'
-     
-      
-    
-      - ${{ if contains(parameters.configs, 'prod') }}:
-        - job: prod
-          steps:
-          - script: echo prod
+                echo 'Hello ashish'
+
+
+  # - stage: SIT_Test
+  #   dependsOn: SIT_Release
+  #   condition: succeeded()
+  #   # variables:
+  #   #   - group: sit-variable-group
+  #   jobs:
+  #     - job: SIT_Test
+  #       pool:
+  #         vmImage: windows-latest
+  #       steps:
+  #         - task: TriggerPipeline@2
+  #           inputs:
+  #             serviceConnection: 'qa-pipeline-trigger-new'
+  #             project: 'e4981ee5-8d05-4c30-9e66-715fd6fdaa4b'
+  #             Pipeline: 'Build'
+  #             buildDefinition: '103'
+  #             Branch: 'refs/heads/main'
+  #             buildapiversion: '7.1-preview.7'
