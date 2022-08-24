@@ -39,7 +39,7 @@ stages:
      
       
     
-      - ${{ if contains(parameters.configs, 'prod') }}:
+      - ${{ if contains(parameters.configs, 'prod') }}
       - job: prod
         pool:
             vmImage: 'windows-latest'
