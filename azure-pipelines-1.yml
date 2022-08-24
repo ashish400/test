@@ -21,12 +21,12 @@ jobs:
 - ${{ if contains(parameters.configs, 'qa') }}:
   - job: x86
     steps:
-    - script: echo Building x86...
+    - script: echo qa.
 - ${{ if contains(parameters.configs, 'dev') }}:
   - job: x64
     steps:
-    - script: echo Building x64...
+    - script: echo dev environment
 - ${{ if contains(parameters.configs, 'prod') }}:
   - job: arm
     steps:
-    - script: echo Building arm...
+    - script: echo prod
