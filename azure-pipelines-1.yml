@@ -19,10 +19,10 @@ trigger: none
 stages:
   - stage: one
     jobs:
-      - ${{ if contains(parameters.configs, 'dev') }}:
+       ${{ if contains(parameters.configs, 'dev') }}:
       - job: one
-        pool:
-          vmImage: 'windows-latest'
+        # pool:
+        #   vmImage: 'windows-latest'
         steps:
         -   script: echo hello from Windows
                 
