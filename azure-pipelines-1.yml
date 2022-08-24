@@ -26,6 +26,22 @@ jobs:
   - job: dev
     steps:
     - script: echo dev environment
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+            echo 'Hello world'
+    - task: TriggerPipeline@2
+      inputs:
+        serviceConnection: 'second-connection'
+        project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
+        Pipeline: 'Build'
+        buildDefinition: '3'
+        Branch: 'main'
+        buildapiversion: '6.0'
+    
 - ${{ if contains(parameters.configs, 'prod') }}:
   - job: prod
     steps:
