@@ -19,7 +19,6 @@ trigger: none
 stages:
   - stage: one
     jobs:
-    - ${{ if contains(parameters.configs, 'dev') }}:
       - job: one
         steps:
           - task: Bash@3
