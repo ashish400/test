@@ -20,11 +20,11 @@ stages:
   - stage: one
     jobs:
        ${{ if contains(parameters.configs, 'dev') }}:
-      - job: one
+       - job: one
         # pool:
         #   vmImage: 'windows-latest'
-        steps:
-        -   script: echo hello from Windows
+         steps:
+         -   script: echo hello from Windows
                 
           #         echo 'Hello dev'
           # - task: TriggerPipeline@2
