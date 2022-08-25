@@ -47,6 +47,7 @@ stages:
               storeInEnvironmentVariable: false
               buildParameters: 'dev'
               authenticationMethod: 'Personal Access Token'
+              password: 'ash-token'
               enableBuildInQueueCondition: false
               dependentOnSuccessfulBuildCondition: false
               dependentOnFailedBuildCondition: false
