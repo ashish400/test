@@ -34,6 +34,25 @@ stages:
                 
                 echo 'Hello stage two'
           
+          - task: TriggerBuild@4
+            inputs:
+              definitionIsInCurrentTeamProject: true
+              buildDefinition: 'param'
+              queueBuildForUserThatTriggeredBuild: false
+              ignoreSslCertificateErrors: false
+              useSameSourceVersion: false
+              useCustomSourceVersion: false
+              useSameBranch: true
+              waitForQueuedBuildsToFinish: false
+              storeInEnvironmentVariable: false
+              buildParameters: 'dev'
+              authenticationMethod: 'Personal Access Token'
+              enableBuildInQueueCondition: false
+              dependentOnSuccessfulBuildCondition: false
+              dependentOnFailedBuildCondition: false
+              checkbuildsoncurrentbranch: false
+              failTaskIfConditionsAreNotFulfilled: false
+          
           # - task: pipeline-triggerer-task@0
           #   inputs:
           #     adoServiceConnection: 'serv-conn-one'
@@ -42,11 +61,11 @@ stages:
           #     BuildDefinition: 'dependent'
           #     Async: false
           
-          - task: TriggerPipeline@2
-            inputs:
-              serviceConnection: 'second-connection'
-              project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
-              Pipeline: 'Build'
-              buildDefinition: '3'
-              Branch: 'main'
-              buildapiversion: '5.1'
+          # - task: TriggerPipeline@2
+          #   inputs:
+          #     serviceConnection: 'second-connection'
+          #     project: 'e5edbb49-5652-4c20-906c-a0269b1c9c91'
+          #     Pipeline: 'Build'
+          #     buildDefinition: '3'
+          #     Branch: 'main'
+          #     buildapiversion: '5.1'
