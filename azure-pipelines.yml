@@ -42,12 +42,12 @@ stages:
               ignoreSslCertificateErrors: false
               useSameSourceVersion: false
               useCustomSourceVersion: false
-              useSameBranch: true
+              useSameBranch: false
               waitForQueuedBuildsToFinish: false
               storeInEnvironmentVariable: false
               buildParameters: 'dev'
-              authenticationMethod: 'Personal Access Token'
-              password: 'ash-token'
+              authenticationMethod: 'Basic Authentication'
+              username: 'ashmatap@publicisgroupe.net'
               enableBuildInQueueCondition: false
               dependentOnSuccessfulBuildCondition: false
               dependentOnFailedBuildCondition: false
